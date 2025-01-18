@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Outfit', sans-serif;
+}
+
+.font-Lexend {
+  font-family: 'Lexend', sans-serif;
+}
+
+.font-Roboto {
+  font-family: 'Roboto', sans-serif;
+}
+
+
+html, body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+
+@keyframes fadeInDownBlurColor {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+    filter: blur(10px) sepia(1) hue-rotate(180deg) saturate(2);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0) sepia(0) hue-rotate(0deg) saturate(1);
+  }
+}
+
+@keyframes fadeInUpBlurColor {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+    filter: blur(10px) sepia(1) hue-rotate(180deg) saturate(2);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0) sepia(0) hue-rotate(0deg) saturate(1);
+  }
+}
+
+@keyframes fadeInBlurColor {
+  from {
+    opacity: 0;
+    filter: blur(10px) sepia(1) hue-rotate(180deg) saturate(2);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0) sepia(0) hue-rotate(0deg) saturate(1);
+  }
+}
+
+.animate-fade-in-down {
+  animation: fadeInDownBlurColor 1s ease-out;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUpBlurColor 1s ease-out 0.5s both;
+}
+
+.animate-fade-in {
+  animation: fadeInBlurColor 1s ease-out 1s both;
+}
+
+@keyframes scrollLeft {
+  0% {
+      transform: translateX(100%);
+  }
+  100% {
+      transform: translateX(-100%);
+  }
+}
+
+.scrolling-text:not(.scrolling) {
+  animation-play-state: paused;
+}
