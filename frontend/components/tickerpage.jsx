@@ -262,11 +262,10 @@ export default function Home() {
                     </div>
                 </div>
 
-                <div className="mt-16 ml-10 w-[70%] text-lg text-white">
-                    <p className="mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
-                    <p className="mb-4">Quisque convallis magna vel nisl tempor maximus...</p>
-                    <p>Curabitur imperdiet dolor vel facilisis gravida...</p>
+                <div className="mt-2 ml-10 w-[70%] h-64 overflow-y-auto border-white/20 rounded-md p-4 bg-white/10 backdrop-blur-md">
+                    <p className="mb-4">Order Book</p>
                 </div>
+
             </div>
         </main>
     );

@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'; // Import Framer Motion
 const ChartComponent = props => {
     const {
         data,
-        ticker, // Get ticker from props
+        ticker,
         colors: {
             backgroundColor = 'black',
             lineColor = '#2962FF',
@@ -18,7 +18,7 @@ const ChartComponent = props => {
 
     const chartContainerRef = useRef(null);
     const [chartData, setChartData] = useState(data);
-    const [isDataValid, setIsDataValid] = useState(true); // Track if the data is valid
+    const [isDataValid, setIsDataValid] = useState(true);
 
     useEffect(() => {
         if (!chartContainerRef.current) return;
@@ -63,31 +63,30 @@ const ChartComponent = props => {
                 const response = await fetch(`http://localhost:8080/recent?ticker=${ticker}`);
                 const data = await response.json();
 
-                // If the data is not an array, fall back to initialData
                 if (Array.isArray(data)) {
                     const newData = data.map((value, index) => ({
-                        time: `2018-12-${10 + index}`,  // Adjust the date formatting as needed
-                        value: parseFloat(value),  // Ensure the value is parsed to a number
+                        time: `2018-12-${10 + index}`, //default values
+                        value: parseFloat(value),
                     }));
                     setChartData(newData);
-                    setIsDataValid(true); // Set valid data state
+                    setIsDataValid(true);
                 } else {
-                    setChartData(initialData); // Fallback to initialData if the data is not in expected format
-                    setIsDataValid(false); // Set invalid data state
+                    setChartData(initialData);
+                    setIsDataValid(false);
                 }
             } catch {
-                setChartData(initialData); // Fallback to initialData in case of an error
-                setIsDataValid(false); // Set invalid data state
+                setChartData(initialData);
+                setIsDataValid(false);
             }
         };
 
         if (ticker) {
-            fetchData(); // Fetch data when ticker is set
+            fetchData();
         }
 
         const intervalId = setInterval(fetchData, 500);
         return () => clearInterval(intervalId);
-    }, [ticker]); // Depend on ticker
+    }, [ticker]);
 
     return (
         <div style={{ position: 'relative', width: '100%', height: '60vh' }}>
