@@ -37,6 +37,16 @@ export default function Home() {
             return;
         }
 
+        // Check if user has enough shares to sell
+        if (!isBuy) {
+            const currentHolding = holdings.find(holding => holding.ticker === ticker);
+            const ownedShares = currentHolding ? currentHolding.shares : 0;
+            if (shares > ownedShares) {
+                setPopupMessage(`Cannot sell ${shares} shares of ${ticker}. You only own ${ownedShares} shares.`);
+                return;
+            }
+        }
+
         const quantity = isBuy ? shares : -shares;
 
         fetch(`http://localhost:8080/place?username=${username}&ticker=${ticker}&quantity=${quantity}`)
@@ -175,6 +185,12 @@ export default function Home() {
     return (
         <main className="flex flex-col min-h-screen bg-black text-white p-4">
             <div className="flex flex-col w-full animate-fade-in-down">
+                {popupMessage && (
+                    <div className="fixed top-36 left-1/2 transform -translate-x-1/2 bg-black text-white py-2 px-4 rounded-md z-50 border border-white/20">
+                        {popupMessage}
+                    </div>
+                )}
+
                 <div className="flex items-center mt-6 ml-10">
                     <a className="cursor-pointer" href="/">
                         <h1 className="text-4xl sm:text-5xl md:text-6xl font-black">
@@ -221,12 +237,6 @@ export default function Home() {
                         <button className="cursor-pointer rounded-[8px] bg-neutral-200 px-3 py-1 text-sm text-neutral-950 transition-colors hover:bg-neutral-100 active:bg-neutral-50">Transfer Funds</button>
                     </a>
                 </div>
-
-                {popupMessage && (
-                    <div className="fixed bottom-10 left-1/2 transform -translate-x-1/2 bg-black text-white py-2 px-4 rounded-md z-50">
-                        {popupMessage}
-                    </div>
-                )}
 
                 <div className="flex-1 mt-16 ml-10 w-[70%] relative">
                     <ChartComponent ticker={ticker} />
@@ -276,7 +286,6 @@ export default function Home() {
                         </h2>
                     </div>
                 </div>
-
             </div>
         </main>
     );
