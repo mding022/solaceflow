@@ -7,6 +7,7 @@ SolaceFlow is an implementation of the data streams between stock market exchang
 - Implements Solace's Event Broker Queues to communicate data between the stock exchange, simulated market data, and backend client.
 - ```Queue: stocks/price/update/*``` simulated market data is published into the queue, and all connected backend clients are automatically subscribed to the data stream.
 - ```Queue: stocks/exchange/orders``` orders placed by the backend client are published into this queue and are processed by the stock exchange, by matching a buyer and a seller. For the purposes of this project, it is assumed there is enough liquidity for all clients to buy/sell freely.
+- ```Queue: stocks/exchange/orderbook``` orders placed by all clients in the exchange are publically published by the exchange application in this queue.
 
 ## Deployment
 
