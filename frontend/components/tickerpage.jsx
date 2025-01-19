@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import ChartComponent from './stockupdates/sample';
 import stockNames from './stockupdates/name.json';
+import Orderbook from './orderbook/orderbookData'
 import { motion } from 'framer-motion';
 
 export default function Home() {
@@ -200,7 +201,7 @@ export default function Home() {
                                 transition={{ duration: 0.2, ease: 'easeOut' }}
                             >
                                 <span className="text-2xl font-extrabold text-slate-300">{stockData.name}</span>
-                                <span className="text-4xl font-black ml-3">${stockData.price}<span className="text-gray-200 text-2xl ml-1">&nbsp;USD</span></span>
+                                <span className="text-4xl font-black ml-3">${stockData.price}<span className="text-gray-200 text-lg ml-0.5 font-normal">&nbsp;USD</span></span>
                             </motion.div>
                         )}
                     </h2>
@@ -213,8 +214,8 @@ export default function Home() {
                     <p className="text-4xl rounded-md font-extrabold text-white flex items-center">
                         ${portfolioBalance.toFixed(2)}
                     </p>
-                    <p className="text-xl px-0.5 rounded-md font-black text-green-300 flex items-center">
-                        Cash: ${cashBalance.toFixed(2)}
+                    <p className={`text-xl px-0.5 rounded-md font-black ${cashBalance < 0 ? 'text-pink-300' : 'text-green-300'} flex items-center`}>
+                        {cashBalance < 0 ? 'Margin:' : 'Cash:'} ${cashBalance.toFixed(2)}
                     </p>
                     <a href="#" className="mt-2 z-50">
                         <button className="cursor-pointer rounded-[8px] bg-neutral-200 px-3 py-1 text-sm text-neutral-950 transition-colors hover:bg-neutral-100 active:bg-neutral-50">Transfer Funds</button>
@@ -262,8 +263,18 @@ export default function Home() {
                     </div>
                 </div>
 
-                <div className="mt-2 ml-10 w-[70%] h-64 overflow-y-auto border-white/20 rounded-md p-4 bg-white/10 backdrop-blur-md">
-                    <p className="mb-4">Order Book</p>
+                <p className="mb-1 pl-10 text-2xl font-bold">Order Book</p>
+                <div className="flex items-start ml-10 w-[60%]">
+                    <div className="w-[60%] h-[90px] overflow-y-auto border-white/20 rounded-md p-4 bg-white/10 backdrop-blur-md">
+                        <Orderbook />
+                    </div>
+                    <div className="w-[40%] h-[90px] flex items-center justify-center border-white/20 rounded-md p-4 bg-white/10 backdrop-blur-md ml-4">
+                        <h2 className={`text-3xl font-bold ${portfolioBalance >= 10000 ? 'text-green-300' : 'text-pink-300'}`}>
+                            {portfolioBalance >= 10000
+                                ? `Total Profit: $${(portfolioBalance - 10000).toFixed(2)}`
+                                : `Total Loss: $${(10000 - portfolioBalance).toFixed(2)}`}
+                        </h2>
+                    </div>
                 </div>
 
             </div>
