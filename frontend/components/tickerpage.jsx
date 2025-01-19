@@ -161,25 +161,45 @@ export default function Home() {
 
     if (!isAuthenticated) {
         return (
-            <div className="flex justify-center items-center min-h-screen bg-black text-white">
-                <div className="flex flex-col items-center">
-                    <h1 className="text-2xl sm:text-2xl md:text-3xl font-semibold mb-10">Login using your SolaceFlow Demo Account</h1>
-                    <input
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+                className="flex justify-center items-center min-h-screen bg-black text-white"
+            >
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+                    className="flex flex-col items-center"
+                >
+                    <h1 className="text-2xl sm:text-2xl md:text-3xl font-semibold mb-10">
+                        Login using your SolaceFlow Demo Account
+                    </h1>
+                    <motion.input
                         type="text"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                         placeholder="Enter your @username"
                         className="bg-white/10 text-white px-6 py-4 rounded-md border border-white/20 focus:outline-none focus:ring-2 focus:ring-white/40 placeholder-white/60 text-lg w-64 h-[4rem]"
                         autoFocus
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
                     />
-                    <button
+                    <motion.button
                         onClick={handleUsernameSubmit}
                         className="mt-8 bg-lime-700 text-white px-6 py-4 rounded-md"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, ease: "easeOut", delay: 0.6 }}
                     >
                         Log In
-                    </button>
-                </div>
-            </div>
+                    </motion.button>
+                </motion.div>
+            </motion.div>
         );
     }
 
