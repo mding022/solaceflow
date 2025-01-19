@@ -15,6 +15,12 @@ export default function Home() {
     const [holdings, setHoldings] = useState([]);
     const [popupMessage, setPopupMessage] = useState('');
 
+    const formatNumber = (num) =>
+        new Intl.NumberFormat("en-US", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+        }).format(num);
+
     const handleUsernameSubmit = () => {
         fetch(`http://localhost:8080/authenticate?username=${username}`)
             .then((response) => response.text())
@@ -249,10 +255,10 @@ export default function Home() {
                         Logged in: @{username}
                     </p>
                     <p className="text-4xl rounded-md font-extrabold text-white flex items-center">
-                        ${portfolioBalance.toFixed(2)}
+                        ${formatNumber(portfolioBalance.toFixed(2))}
                     </p>
                     <p className={`text-xl px-0.5 rounded-md font-black ${cashBalance < 0 ? 'text-pink-300' : 'text-green-300'} flex items-center`}>
-                        {cashBalance < 0 ? 'Margin:' : 'Cash:'} ${cashBalance.toFixed(2)}
+                        {cashBalance < 0 ? 'Margin:' : 'Cash:'} ${formatNumber(cashBalance.toFixed(2))}
                     </p>
                     <a href="#" className="mt-2 z-50">
                         <button className="cursor-pointer rounded-[8px] bg-neutral-200 px-3 py-1 text-sm text-neutral-950 transition-colors hover:bg-neutral-100 active:bg-neutral-50">Transfer Funds</button>
@@ -288,7 +294,7 @@ export default function Home() {
                         {holdings.map((stock, index) => (
                             <div key={index} className="flex justify-between py-2 border-b border-white/20">
                                 <span>{stock.ticker}</span>
-                                <span>{stock.shares} shares</span>
+                                <span>{formatNumber(stock.shares)} shares</span>
                             </div>
                         ))}
                     </div>
@@ -301,9 +307,11 @@ export default function Home() {
                     </div>
                     <div className="w-[40%] h-[90px] flex items-center justify-center border-white/20 rounded-md p-4 bg-white/10 backdrop-blur-md ml-4">
                         <h2 className={`text-3xl font-bold ${portfolioBalance >= 10000 ? 'text-green-300' : 'text-pink-300'}`}>
-                            {portfolioBalance >= 10000
-                                ? `Total Profit: $${(portfolioBalance - 10000).toFixed(2)}`
-                                : `Total Loss: $${(10000 - portfolioBalance).toFixed(2)}`}
+                                {portfolioBalance >= 10000 ? (
+                                    <>Total Profit: ${formatNumber(portfolioBalance - 10000)}</>
+                                ) : (
+                                    <>Total Loss: ${formatNumber(10000 - portfolioBalance)}</>
+                                )}
                         </h2>
                     </div>
                 </div>
