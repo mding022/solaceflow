@@ -28,7 +28,7 @@ Or, you can run the Spring project and React project separately:
 ```
 ## Demo
 
-After successfully deploying this project, you should be able to visit ```localhost:3000```. You can use multiple instances of the localhost, as it runs independently of each other through user-login sessions. User-data will be saved in the backend client side of the application. ![Video Link](https://www.youtube.com/watch?v=-MLvedE2G5M)
+After successfully deploying this project, you should be able to visit ```localhost:3000```. You can use multiple instances of the localhost, as it runs independently of each other through user-login sessions. User-data will be saved in the backend client side of the application. [Video Link](https://www.youtube.com/watch?v=-MLvedE2G5M)
 
 ## Screenshots
 
