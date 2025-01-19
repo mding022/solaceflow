@@ -170,6 +170,7 @@ export default function Home() {
                         onChange={(e) => setUsername(e.target.value)}
                         placeholder="Enter your @username"
                         className="bg-white/10 text-white px-6 py-4 rounded-md border border-white/20 focus:outline-none focus:ring-2 focus:ring-white/40 placeholder-white/60 text-lg w-64 h-[4rem]"
+                        autoFocus
                     />
                     <button
                         onClick={handleUsernameSubmit}
