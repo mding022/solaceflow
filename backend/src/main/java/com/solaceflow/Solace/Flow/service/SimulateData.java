@@ -21,8 +21,16 @@ public class SimulateData {
     public void generateRandomData() throws Exception {
         String[] parsed = new String[10];
         for(int i = 0; i < 10; ++i) {
-            double randomValue = Math.abs(random.nextDouble()/2);
-            price[i]+=randomValue;
+            double randomValue = Math.abs(random.nextDouble());
+            if(price[i] > 50) {
+                if(random.nextDouble() > 0.3) {
+                    price[i] += randomValue;
+                } else {
+                    price[i] -= randomValue*2;
+                }
+            } else {
+                price[i] += randomValue;
+            }
             String formattedValue = decimalFormat.format(price[i]);
             parsed[i] = formattedValue;
         }
