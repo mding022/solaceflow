@@ -1,7 +1,10 @@
-import React from 'react';
-import Lottie from 'react-lottie';
-import animationData from './landing.json';
+"use client";
 
+import React from "react";
+import dynamic from "next/dynamic";
+const Lottie = dynamic(() => import("react-lottie"), { ssr: false });
+
+import animationData from "./landing.json";
 
 const LottieAnimation = () => {
     const defaultOptions = {
@@ -9,7 +12,7 @@ const LottieAnimation = () => {
         autoplay: true,
         animationData: animationData,
         rendererSettings: {
-            preserveAspectRatio: 'xMidYMid slice',
+            preserveAspectRatio: "xMidYMid slice",
         },
     };
 
