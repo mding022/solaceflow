@@ -39,6 +39,7 @@ public class DataController {
         for (String ticker : tickers) {
             history.put(ticker, empty.clone());
         }
+
     }
 
     @GetMapping("/overview")
@@ -119,6 +120,10 @@ public class DataController {
     @GetMapping("/recent")
     public List<String> getRecent(@RequestParam String ticker) {
         List<String> res = new ArrayList<String>();
+        if(!history.containsKey(ticker)) {
+            System.out.println(ticker + "isn't found.");
+            return null;
+        }
         for(int i = 0; i < 10; ++i) {
             res.add(String.valueOf(history.get(ticker)[i]));
         }

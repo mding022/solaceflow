@@ -23,7 +23,6 @@ public class ExchangeController {
 
     public double matchOrder(String order) {
         String[] chunks = order.split(";");
-        System.out.println("Process this data:");
         if (Integer.valueOf(chunks[2]) > 0) {
             orderbook.add("BUY " + chunks[1] + " - @" + chunks[0] + " bought " + chunks[2] + " shares at $" +  chunks[3] + " per share.");
         } else {
